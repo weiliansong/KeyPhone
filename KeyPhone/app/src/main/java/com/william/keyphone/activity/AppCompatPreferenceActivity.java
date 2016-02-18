@@ -1,4 +1,4 @@
-package com.william.keyphone;
+package com.william.keyphone.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
