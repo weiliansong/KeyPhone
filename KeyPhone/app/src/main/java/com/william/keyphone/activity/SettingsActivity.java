@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.william.keyphone.R;
+import com.william.keyphone.service.ServiceMain;
 
 import java.util.List;
 
@@ -252,5 +253,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void startService() {
+        Intent intent = new Intent(this, ServiceMain.class);
+        startService(intent);
     }
 }
