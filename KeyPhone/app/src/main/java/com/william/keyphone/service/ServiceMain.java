@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.Process;
 import android.os.Handler;
 import android.widget.Toast;
+import java.net.Socket;
 
 /**
  * Created by William on 2/18/2016.
@@ -16,6 +17,10 @@ import android.widget.Toast;
 public class ServiceMain extends Service {
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
+
+    public ServiceMain() {
+
+    }
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
@@ -25,7 +30,8 @@ public class ServiceMain extends Service {
         @Override
         public void handleMessage(Message msg) {
             try {
-                Thread.sleep(5000);
+                // Forward text here
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

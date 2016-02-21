@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".KeyPhoneService"
+            android:name=".service.ServiceMain"
             android:exported="false"/>
         <activity
             android:name=".activity.SettingsActivity"
