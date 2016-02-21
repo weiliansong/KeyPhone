@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 public class KeyPhoneFrame extends JFrame {
 
 	private static final long serialVersionUID = -3576179975881750942L;
-	private static final int WIDTH = 1080;
-	private static final int HEIGHT = 720;
+	private static final int WIDTH = 400;
+	private static final int HEIGHT = 200;
 	
 	private static JPanel settings_panel;
 	private static JTextField text_field;
@@ -31,7 +31,6 @@ public class KeyPhoneFrame extends JFrame {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setUp();
-		windowListener();
 		
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -53,19 +52,19 @@ public class KeyPhoneFrame extends JFrame {
 		add(settings_panel);
 	}
 	
-	private void windowListener() {
-		this.addWindowFocusListener(new WindowFocusListener() {
-
-			@Override
-			public void windowGainedFocus(WindowEvent arg0) {
-				text_area.append("Window gained focus\n");
-			}
-
-			@Override
-			public void windowLostFocus(WindowEvent arg0) {
-				text_area.append("Window lost focus\n");
-			}
-			
-		});
-	}
+//	private void windowListener() {
+//		this.addWindowFocusListener(new WindowFocusListener() {
+//
+//			@Override
+//			public void windowGainedFocus(WindowEvent arg0) {
+//				text_area.append("Window gained focus\n");
+//			}
+//
+//			@Override
+//			public void windowLostFocus(WindowEvent arg0) {
+//				text_area.append("Window lost focus\n");
+//			}
+//			
+//		});
+//	}
 }
