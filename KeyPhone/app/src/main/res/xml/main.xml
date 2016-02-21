@@ -20,5 +20,7 @@
         android:defaultValue="0"
         android:dependency="forwarding_switch"
         android:key="port_number"
+        android:inputType="phone"
+        android:digits="0123456789"
         android:title="Port Number of Computer" />
 </PreferenceScreen>
