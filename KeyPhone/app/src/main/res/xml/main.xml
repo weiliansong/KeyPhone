@@ -13,6 +13,8 @@
         android:defaultValue="0.0.0.0"
         android:dependency="forwarding_switch"
         android:key="ip_address"
+        android:inputType="phone"
+        android:digits="0123456789."
         android:title="IP Address of Computer" />
     <EditTextPreference
         android:defaultValue="0"
