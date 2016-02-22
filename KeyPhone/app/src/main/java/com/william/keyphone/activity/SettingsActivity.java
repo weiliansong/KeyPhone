@@ -55,7 +55,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
                 else{
                     //Notify user that wifi needs to be enabled.
-                    preference.setSwitchTextOff("Wifi needs to be connected!");
+                    SwitchPreference switched = (SwitchPreference)preference;
+                    switched.setSwitchTextOff("Wifi needs to be connected!");
                     preference.setEnabled(false);
                 }
 
