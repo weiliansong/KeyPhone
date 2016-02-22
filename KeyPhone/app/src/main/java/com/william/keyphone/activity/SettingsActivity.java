@@ -48,9 +48,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
+            ConnectionStatus connection = new ConnectionStatus(preference.getContext());
 
             if (preference instanceof SwitchPreference) {
-                //TODO: implement cases to start certain phone services i.e. vibrate and connect to computer.
+                //TODO: implement popup if user does not have wifi enabled
+                if(connection.hasWifiEnabled()){
+                    //keep going
+                }
+                else{
+                    //Notify user that wifi needs to be enabled.
+                }
 
             } else if (preference instanceof EditTextPreference) {
 
