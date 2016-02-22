@@ -44,14 +44,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
-            String stringValue = value.toString();
+
             ConnectionStatus connection = new ConnectionStatus(preference.getContext());
 
             if (preference instanceof SwitchPreference) {
                 //TODO: implement popup if user does not have wifi enabled
                 
                 if(connection.hasWifiEnabled()){
-                    preference.setSummary(null);
+                   preference.setSummary("");
                 }
                 else{
                     //Notify user that wifi needs to be enabled.
@@ -64,12 +64,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
                 // For all edit text preferences, set the summary to the value's
                 // simple string representation.
-                preference.setSummary(stringValue);
+                preference.setSummary(PreferenceManager
+                        .getDefaultSharedPreferences(preference.getContext())
+                        .getString(preference.getKey(), ""));
 
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
-                preference.setSummary(stringValue);
+                preference.setSummary(PreferenceManager
+                        .getDefaultSharedPreferences(preference.getContext())
+                        .getString(preference.getKey(), ""));
             }
             return true;
         }
@@ -98,10 +102,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, null);
     }
 
     @Override
@@ -110,7 +111,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         setupActionBar();
         bindPreferenceSummaryToValue(findPreference("ip_address"));
         bindPreferenceSummaryToValue(findPreference("port_number"));
-        bindPreferenceSummaryToValue(findPreference("vibrate_only_option"));
+        bindPreferenceSummaryToValue(findPreference("forwarding_switch"));
     }
 
     /**
