@@ -3,12 +3,8 @@
     <SwitchPreference
         android:defaultValue="false"
         android:key="forwarding_switch"
+        android:summaryOff="Please connect to the same wifi connection as the computer, before connecting."
         android:title="Forward Text to Computer" />
-    <SwitchPreference
-        android:defaultValue="true"
-        android:dependency="forwarding_switch"
-        android:key="vibrate_only_option"
-        android:title="Change into Vibrate Mode" />
     <EditTextPreference
         android:defaultValue="0.0.0.0"
         android:dependency="forwarding_switch"
