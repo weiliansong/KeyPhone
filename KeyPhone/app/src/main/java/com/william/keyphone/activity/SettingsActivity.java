@@ -46,22 +46,18 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
-
+            String stringValue = value.toString();
             if (preference instanceof EditTextPreference) {
 
                 //TODO: Fix this so when user types in it saves not when user re-enters and saves
                 // For all edit text preferences, set the summary to the value's
                 // simple string representation.
-                preference.setSummary(PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+                preference.setSummary(stringValue);
 
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
-                preference.setSummary(PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+                preference.setSummary(stringValue);
             }
             return true;
         }
