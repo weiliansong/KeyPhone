@@ -4,6 +4,7 @@ package com.william.keyphone.activity;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -47,7 +48,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
             ConnectionStatus connection = new ConnectionStatus(preference.getContext());
 
-            if (preference instanceof SwitchPreference) {
+          /*  if (preference instanceof SwitchPreference) {
                 //TODO: implement popup if user does not have wifi enabled
                 
                 if(connection.hasWifiEnabled()){
@@ -55,12 +56,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
                 else{
                     //Notify user that wifi needs to be enabled.
-                    SwitchPreference switched = (SwitchPreference)preference;
-                    switched.setSwitchTextOff("Wifi needs to be connected!");
-                    preference.setEnabled(false);
+                    ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
+                    ((SwitchPreference) preference).setChecked(false);
+                    PreferenceManager.getDefaultSharedPreferences(preference.getContext()).edit().apply();
                 }
 
-            } else if (preference instanceof EditTextPreference) {
+            } */if (preference instanceof EditTextPreference) {
 
                 // For all edit text preferences, set the summary to the value's
                 // simple string representation.
@@ -111,7 +112,26 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         setupActionBar();
         bindPreferenceSummaryToValue(findPreference("ip_address"));
         bindPreferenceSummaryToValue(findPreference("port_number"));
-        bindPreferenceSummaryToValue(findPreference("forwarding_switch"));
+        Preference pref = (SwitchPreference)findPreference("forwarding_switch");
+        pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                ConnectionStatus connection = new ConnectionStatus(preference.getContext());
+                if (preference instanceof SwitchPreference) {
+                    //TODO: implement popup if user does not have wifi enabled
+
+                    if (connection.hasWifiEnabled()) {
+                        preference.setSummary("");
+                    } else {
+                        //Notify user that wifi needs to be enabled.
+                        ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
+                        ((SwitchPreference) preference).setChecked(false);
+                        }
+
+                }
+                return true;
+            }
+        });
+       // bindPreferenceSummaryToValue(findPreference("forwarding_switch"));
     }
 
     /**

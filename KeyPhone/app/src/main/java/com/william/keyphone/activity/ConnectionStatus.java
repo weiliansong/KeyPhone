@@ -14,7 +14,8 @@ public class ConnectionStatus {
     private Vibrator v;
     public ConnectionStatus(){}
 
-    public ConnectionStatus(Context mContext){
+    public ConnectionStatus(Context mcontext){
+        mContext = mcontext;
         v = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
