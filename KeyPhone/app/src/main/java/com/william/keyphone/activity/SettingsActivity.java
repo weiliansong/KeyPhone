@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -46,23 +47,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
 
-            ConnectionStatus connection = new ConnectionStatus(preference.getContext());
+            if (preference instanceof EditTextPreference) {
 
-          /*  if (preference instanceof SwitchPreference) {
-                //TODO: implement popup if user does not have wifi enabled
-                
-                if(connection.hasWifiEnabled()){
-                   preference.setSummary("");
-                }
-                else{
-                    //Notify user that wifi needs to be enabled.
-                    ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
-                    ((SwitchPreference) preference).setChecked(false);
-                    PreferenceManager.getDefaultSharedPreferences(preference.getContext()).edit().apply();
-                }
-
-            } */if (preference instanceof EditTextPreference) {
-
+                //TODO: Fix this so when user types in it saves not when user re-enters and saves
                 // For all edit text preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(PreferenceManager
@@ -103,7 +90,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, null);
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,PreferenceManager.getDefaultSharedPreferences(
+                preference.getContext()).getString(preference.getKey(),""));
     }
 
     @Override
@@ -112,26 +100,26 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         setupActionBar();
         bindPreferenceSummaryToValue(findPreference("ip_address"));
         bindPreferenceSummaryToValue(findPreference("port_number"));
-        Preference pref = (SwitchPreference)findPreference("forwarding_switch");
-        pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Preference pref = findPreference("forwarding_switch");
+
+        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
                 ConnectionStatus connection = new ConnectionStatus(preference.getContext());
                 if (preference instanceof SwitchPreference) {
                     //TODO: implement popup if user does not have wifi enabled
 
                     if (connection.hasWifiEnabled()) {
                         preference.setSummary("");
+                        ((SwitchPreference) preference).setChecked(true);
                     } else {
                         //Notify user that wifi needs to be enabled.
                         ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
-                        ((SwitchPreference) preference).setChecked(false);
-                        }
-
+                        //((SwitchPreference) preference).setChecked(false);
+                    }
                 }
                 return true;
             }
         });
-       // bindPreferenceSummaryToValue(findPreference("forwarding_switch"));
     }
 
     /**
