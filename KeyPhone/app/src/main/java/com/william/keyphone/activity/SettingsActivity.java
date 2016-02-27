@@ -102,7 +102,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             public boolean onPreferenceClick(Preference preference) {
                 ConnectionStatus connection = new ConnectionStatus(preference.getContext());
                 if (preference instanceof SwitchPreference) {
-                    //TODO: implement popup if user does not have wifi enabled
 
                     if (connection.hasWifiEnabled()) {
                         preference.setSummary("");
@@ -110,7 +109,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     } else {
                         //Notify user that wifi needs to be enabled.
                         ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
-                        //((SwitchPreference) preference).setChecked(false);
+                        //TODO: Emulate wifi
+                        connection.vibrate();
+                        ((SwitchPreference) preference).setChecked(false);
                     }
                 }
                 return true;

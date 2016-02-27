@@ -9,7 +9,6 @@ import android.os.Vibrator;
  * Created by Edwin on 2/22/2016.
  */
 public class ConnectionStatus {
-    private boolean connection_status;
     Context mContext;
     private Vibrator v;
     public ConnectionStatus(){}
@@ -19,8 +18,8 @@ public class ConnectionStatus {
         v = (Vibrator)mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
-    private void vibrate(){
-        v.vibrate(200);
+    public void vibrate(){
+        v.vibrate(300);
     }
 
     public boolean hasWifiEnabled(){
