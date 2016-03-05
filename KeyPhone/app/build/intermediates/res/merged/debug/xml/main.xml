@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="forwarding_switch"
+        android:summaryOff="Please connect to the same wifi connection as the computer, before connecting."
+        android:title="Forward Text to Computer" />
+    <EditTextPreference
+        android:defaultValue="0.0.0.0"
+        android:dependency="forwarding_switch"
+        android:key="ip_address"
+        android:inputType="phone"
+        android:digits="0123456789."
+        android:title="IP Address of Computer" />
+    <EditTextPreference
+        android:defaultValue="0"
+        android:dependency="forwarding_switch"
+        android:key="port_number"
+        android:inputType="phone"
+        android:digits="0123456789"
+        android:title="Port Number of Computer" />
+</PreferenceScreen>
