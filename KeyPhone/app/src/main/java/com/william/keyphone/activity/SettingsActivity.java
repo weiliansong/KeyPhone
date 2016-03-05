@@ -23,8 +23,10 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.william.keyphone.R;
+import com.william.keyphone.networking.Client;
 import com.william.keyphone.service.ServiceMain;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -86,8 +88,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,PreferenceManager.getDefaultSharedPreferences(
-                preference.getContext()).getString(preference.getKey(),""));
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, PreferenceManager.getDefaultSharedPreferences(
+                preference.getContext()).getString(preference.getKey(), ""));
     }
 
     @Override
@@ -106,10 +108,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     if (connection.hasWifiEnabled()) {
                         preference.setSummary("");
                         ((SwitchPreference) preference).setChecked(true);
+                       try{
+                            Client newclient = new Client();
+                        }
+                        catch (IOException e){}
                     } else {
                         //Notify user that wifi needs to be enabled.
                         ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
-                        //TODO: Emulate wifi
+                        
                         connection.vibrate();
                         ((SwitchPreference) preference).setChecked(false);
                     }
