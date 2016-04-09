@@ -105,20 +105,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 ConnectionStatus connection = new ConnectionStatus(preference.getContext());
                 if (preference instanceof SwitchPreference) {
 
-                    if (connection.hasWifiEnabled()) {
-                        preference.setSummary("");
+                   // if (connection.hasWifiEnabled()) {
+                     //   preference.setSummary("");
                         ((SwitchPreference) preference).setChecked(true);
-                       try{
+                        try {
                             Client newclient = new Client();
                         }
-                        catch (IOException e){}
-                    } else {
+                        catch(IOException e){}
+                    //} else {
                         //Notify user that wifi needs to be enabled.
-                        ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
+                      //  ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
                         
-                        connection.vibrate();
-                        ((SwitchPreference) preference).setChecked(false);
-                    }
+                        //connection.vibrate();
+                      //  ((SwitchPreference) preference).setChecked(false);
+                   // }
                 }
                 return true;
             }
