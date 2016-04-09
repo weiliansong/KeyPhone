@@ -1,5 +1,7 @@
 package com.william.keyphone.networking;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,17 +18,20 @@ import javax.net.ssl.SSLSocketFactory;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-public class Client {
-        private static final String HOST = "10.31.116.173";
+public class Client extends AsyncTask<Void, Void, Void> {
+    private static final String HOST = "10.31.116.173";
 
-        private static final int PORT = 10000;
+    private static final int PORT = 10000;
 
-        public Client() throws IOException {
+    @Override
+    protected Void doInBackground(Void... params) {
+
+        try {
             System.setProperty("javax.net.ssl.trustStore", "/storage/emulated/0/Download/keystore.jks");
             System.setProperty("javax.net.ssl.trustStoreSSN", "wshr.ut");
             SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
 
-            SSLSocket s = (SSLSocket)sf.createSocket(HOST, PORT);
+            SSLSocket s = (SSLSocket) sf.createSocket(HOST, PORT);
             s.startHandshake();
             OutputStream out = s.getOutputStream();
             out.write("Connection established.".getBytes());
@@ -34,9 +39,12 @@ public class Client {
 
 
             s.close();
+        } catch (IOException e) {
         }
-    }
 
+            return null;
+    }
+}
 
 
 

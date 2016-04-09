@@ -108,10 +108,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                    // if (connection.hasWifiEnabled()) {
                      //   preference.setSummary("");
                         ((SwitchPreference) preference).setChecked(true);
-                        try {
+
                             Client newclient = new Client();
-                        }
-                        catch(IOException e){}
+                            newclient.execute();
+
                     //} else {
                         //Notify user that wifi needs to be enabled.
                       //  ((SwitchPreference) preference).setSummaryOff("Wifi needs to be connected!");
